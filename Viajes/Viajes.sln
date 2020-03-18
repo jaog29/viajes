@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29827.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viajes.Common", "Viajes.Common\Viajes.Common.csproj", "{F13A3055-3ECD-4CD0-8037-189A6EBEA08B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viajes.Web", "Viajes.Web\Viajes.Web.csproj", "{94C27ECE-EEDD-4EA5-8363-9F5AF6B22A37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viajes.Prism", "Viajes.Prism\Viajes.Prism\Viajes.Prism.csproj", "{B1A3A16C-04A3-486B-B519-18685A280484}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viajes.Prism.Android", "Viajes.Prism\Viajes.Prism.Android\Viajes.Prism.Android.csproj", "{4DE4519D-68A6-4A3C-A95D-D8DBBF1DDA03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viajes.Cross.Android", "Viajes.Cross.Android1\Viajes.Cross.Android.csproj", "{62F6B9E5-18EF-4B07-90CD-1EE547EA741E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F13A3055-3ECD-4CD0-8037-189A6EBEA08B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F13A3055-3ECD-4CD0-8037-189A6EBEA08B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F13A3055-3ECD-4CD0-8037-189A6EBEA08B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F13A3055-3ECD-4CD0-8037-189A6EBEA08B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94C27ECE-EEDD-4EA5-8363-9F5AF6B22A37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94C27ECE-EEDD-4EA5-8363-9F5AF6B22A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94C27ECE-EEDD-4EA5-8363-9F5AF6B22A37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94C27ECE-EEDD-4EA5-8363-9F5AF6B22A37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1A3A16C-04A3-486B-B519-18685A280484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1A3A16C-04A3-486B-B519-18685A280484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1A3A16C-04A3-486B-B519-18685A280484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A3A16C-04A3-486B-B519-18685A280484}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE4519D-68A6-4A3C-A95D-D8DBBF1DDA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE4519D-68A6-4A3C-A95D-D8DBBF1DDA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE4519D-68A6-4A3C-A95D-D8DBBF1DDA03}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4DE4519D-68A6-4A3C-A95D-D8DBBF1DDA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE4519D-68A6-4A3C-A95D-D8DBBF1DDA03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE4519D-68A6-4A3C-A95D-D8DBBF1DDA03}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{62F6B9E5-18EF-4B07-90CD-1EE547EA741E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62F6B9E5-18EF-4B07-90CD-1EE547EA741E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62F6B9E5-18EF-4B07-90CD-1EE547EA741E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{62F6B9E5-18EF-4B07-90CD-1EE547EA741E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62F6B9E5-18EF-4B07-90CD-1EE547EA741E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62F6B9E5-18EF-4B07-90CD-1EE547EA741E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {211033D3-9016-4674-8375-3A5086166E87}
+	EndGlobalSection
+EndGlobal
