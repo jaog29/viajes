@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Viajes.Web.Data.Entities.TripEntity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Trips</h2>
+
+<p>
+    <a asp-action="Create"class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDateTrip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDateTrip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinyCity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDateTrip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDateTrip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestinyCity)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"class="btn btn-warning">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id"class="btn btn-info">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
