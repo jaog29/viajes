@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Viajes.Web.Data;
 using Viajes.Web.Data.Entities;
 
 namespace Viajes.Web
@@ -37,7 +38,7 @@ namespace Viajes.Web
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-
+            services.AddTransient<SeedDb>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
