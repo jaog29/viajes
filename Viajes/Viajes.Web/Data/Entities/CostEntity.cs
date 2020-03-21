@@ -10,7 +10,7 @@ namespace Viajes.Web.Data.Entities
         public int Id { get; set; }
 
         [Required(ErrorMessage = "The field {0} is mandatory.")]
-        public int Value { get; set; }
+        public float Value { get; set; }
 
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         [MaxLength(100, ErrorMessage = "The {0} field must have {1} characters.")]
@@ -22,10 +22,8 @@ namespace Viajes.Web.Data.Entities
         public DateTime CreatedDate { get; set; }
 
         public DateTime CreatedDateLocal => CreatedDate.ToLocalTime();
+        public TripDetailEntity TripDetail { get; set; }
 
-        public string ReceiptPath { get; set; }
-
-        public TripEntity Trips { get; set; }
 
     }
 }

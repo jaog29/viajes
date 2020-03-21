@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Viajes.Web.Data.Entities;
 
 namespace Viajes.Web.Controllers
@@ -32,7 +29,7 @@ namespace Viajes.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips
+            TripEntity tripEntity = await _context.Trips
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tripEntity == null)
             {
@@ -69,7 +66,7 @@ namespace Viajes.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips.FindAsync(id);
+            TripEntity tripEntity = await _context.Trips.FindAsync(id);
             if (tripEntity == null)
             {
                 return NotFound();
@@ -77,7 +74,7 @@ namespace Viajes.Web.Controllers
             return View(tripEntity);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, TripEntity tripEntity)
@@ -90,8 +87,8 @@ namespace Viajes.Web.Controllers
             if (ModelState.IsValid)
             {
                 tripEntity.DestinyCity = tripEntity.DestinyCity.ToUpper();
-                    _context.Update(tripEntity);
-                    await _context.SaveChangesAsync();
+                _context.Update(tripEntity);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(tripEntity);
@@ -105,7 +102,7 @@ namespace Viajes.Web.Controllers
                 return NotFound();
             }
 
-            var tripEntity = await _context.Trips
+            TripEntity tripEntity = await _context.Trips
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tripEntity == null)
             {
@@ -118,7 +115,7 @@ namespace Viajes.Web.Controllers
         }
 
         // POST: Trips/Delete/5
-       
+
         private bool TripEntityExists(int id)
         {
             return _context.Trips.Any(e => e.Id == id);

@@ -23,12 +23,11 @@ namespace Viajes.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public DateTime EndDateTrip { get; set; }
         [Required(ErrorMessage = "The field {0} is mandatory.")]
+
         public string DestinyCity { get; set; }
 
-        public ICollection<CostEntity> Cost { get; set; }
-
         public UserEntity User { get; set; }
-
+        public ICollection<TripDetailEntity> TripDetails { get; set; }
 
     }
 }
