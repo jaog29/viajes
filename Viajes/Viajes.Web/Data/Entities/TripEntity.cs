@@ -27,6 +27,7 @@ namespace Viajes.Web.Data.Entities
         public string DestinyCity { get; set; }
 
         public UserEntity User { get; set; }
+        
         public ICollection<TripDetailEntity> TripDetails { get; set; }
 
     }

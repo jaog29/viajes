@@ -108,6 +108,42 @@ namespace Viajes.Web.Data
                 }
             }
                 }
+            }); _dataContext.Trips.Add(new TripEntity
+            {
+                StartDateTrip = DateTime.UtcNow,
+                EndDateTrip = DateTime.UtcNow.AddMinutes(30),
+                DestinyCity = "Minnesota",
+                User = Admin,
+                TripDetails = new List<TripDetailEntity>
+
+                {
+                    new TripDetailEntity
+                {
+                Origin="Medellin",
+                Description="Se realiza el viaje para un acompañamiento y publicidad de la marca",
+                ReceiptPath="gsfgg/cdrgt/veg.jpg",
+                Costs=new List<CostEntity>
+                {
+                    new CostEntity
+                    {
+                        Value=4500000,
+                        Category="VUELOS",
+                        CreatedDate=DateTime.UtcNow.AddMinutes(30)
+                    },
+                    new CostEntity
+                    {
+                        Value=1000000,
+                        Category="comida",
+                        CreatedDate=DateTime.UtcNow.AddMinutes(30)
+                    },   new CostEntity
+                    {
+                        Value=5000000,
+                        Category="Regalos",
+                        CreatedDate=DateTime.UtcNow.AddMinutes(30)
+                    }
+                }
+            }
+                }
             });
             _dataContext.Trips.Add(new TripEntity
             {
