@@ -52,7 +52,7 @@ namespace Viajes.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                tripEntity.DestinyCity = tripEntity.DestinyCity.ToUpper();
+              ;
                 _context.Add(tripEntity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -88,7 +88,7 @@ namespace Viajes.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                tripEntity.DestinyCity = tripEntity.DestinyCity.ToUpper();
+               
                 _context.Update(tripEntity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

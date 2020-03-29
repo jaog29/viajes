@@ -1,5 +1,6 @@
 ﻿using Prism;
 using Prism.Ioc;
+using Viajes.Common.Services;
 using Viajes.Prism.ViewModels;
 using Viajes.Prism.Views;
 using Xamarin.Forms;
@@ -10,11 +11,7 @@ namespace Viajes.Prism
 {
     public partial class App
     {
-        /* 
-         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
-         * This imposes a limitation in which the App class must have a default constructor. 
-         * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
-         */
+       
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -23,13 +20,20 @@ namespace Viajes.Prism
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("/TripMasterDetailPage/NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.Register< IApiService,ApiService>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<TripMasterDetailPage, TripMasterDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<NewTripDetailPage, NewTripDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<TripHistoryPage, TripHistoryPageViewModel>();
+            containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
+            containerRegistry.RegisterForNavigation<ModifyUserPage, ModifyUserPageViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
         }
     }
 }

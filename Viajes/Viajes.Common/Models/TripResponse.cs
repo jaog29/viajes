@@ -20,7 +20,7 @@ namespace Viajes.Common.Models
     
         public List<TripDetailResponse> TripDetails { get; set; }
         public UserResponse User { get; set; }
-      
 
+     
     }
 }

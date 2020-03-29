@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Viajes.Common.Models;
 using Viajes.Web.Data.Entities;
 using Viajes.Web.Helpers;
 
@@ -26,31 +23,26 @@ namespace Viajes.Web.Controllers.API
 
 
         // GET: api/Trip/5
-        [HttpGet("{destinyCity}")]
-        public async Task<IActionResult> GetTripEntity([FromRoute] string destinyCity)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTaxiEntity([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            TripEntity tripEntity = await _context.Trips
+                .Include(t => t.User)
+                .Include(t => t.TripDetails)
+                .ThenInclude(t => t.Costs)
+                .FirstOrDefaultAsync(t => t.Id == id);
 
-            List<TripEntity> result = _context.Trips
-         .Where(t => t.DestinyCity == destinyCity)
-         .Include(t => t.User)
-         .Include(t => t.TripDetails)
-         .ThenInclude(t => t.Costs)
-         .ToList<TripEntity>();
-
-            List<TripResponse> list2 = new List<TripResponse>();
-            foreach (TripEntity element in result)
+            if (tripEntity == null)
             {
-                list2.Add(_converterHelper.ToTripResponse(element));
+                
+                return NotFound();
             }
 
-            return Ok(list2);
-
+            return Ok(_converterHelper.ToTripResponse(tripEntity));
         }
-
-
     }
 }

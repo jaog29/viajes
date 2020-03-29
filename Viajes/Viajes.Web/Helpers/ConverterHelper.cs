@@ -22,7 +22,7 @@ namespace Viajes.Web.Helpers
                 {
 
 
-                    Id = t.Id,
+                    Id = t.Trip.Id,
                     Origin = t.Origin,
                     Description = t.Description,
                     ReceiptPath = t.ReceiptPath,
@@ -30,13 +30,13 @@ namespace Viajes.Web.Helpers
                     Costs = t.Costs?.Select(td => new CostResponse
                     {
 
-                        Id = td.Id,
+                        Id = td.TripDetail.Id,
                         Value = td.Value,
                         Category = td.Category,
                         CreatedDate = td.CreatedDate
 
                     }).ToList(),
-                 
+                    
                 }).ToList(),
                 User = ToUserResponse(tripEntity.User)
             

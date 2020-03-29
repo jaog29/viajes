@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Viajes.Web.Data.Entities;
 
 namespace Viajes.Web.Data.Entities
 {
-    public class DataContext : IdentityDbContext<UserEntity> { 
+    public class DataContext : IdentityDbContext<UserEntity>
+    {
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

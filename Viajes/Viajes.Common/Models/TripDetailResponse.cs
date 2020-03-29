@@ -12,7 +12,6 @@ namespace Viajes.Common.Models
         public string ReceiptPath { get; set; }
 
         public List<CostResponse> Costs{ get; set; }
-        public UserResponse User { get; set; }
-        public List<TripResponse> Trips { get; set; }
+       
     }
 }
