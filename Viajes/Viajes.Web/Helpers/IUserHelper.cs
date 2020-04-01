@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;    
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Threading.Tasks;
 using Viajes.Web.Data.Entities;
 using Viajes.Web.Models;
@@ -10,7 +8,9 @@ namespace Viajes.Web.Helpers
 {
     public interface IUserHelper
     {
-        Task<UserEntity> GetUserByEmailAsync(string email);
+        Task<UserEntity> GetUserAsync(string email);
+        Task<UserEntity> GetUserAsync(Guid userId);
+
 
         Task<IdentityResult> AddUserAsync(UserEntity user, string password);
 

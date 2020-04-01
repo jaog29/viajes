@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Threading.Tasks;
 using Viajes.Web.Data.Entities;
 using Viajes.Web.Models;
@@ -22,6 +23,12 @@ namespace Viajes.Web.Helpers
             _signInManager = signInManager;
 
         }
+        public async Task<UserEntity> GetUserAsync(Guid userId)
+        {
+            return await _userManager.FindByIdAsync(userId.ToString());
+        }
+
+
         public async Task<IdentityResult> AddUserAsync(UserEntity user, string password)
         {
             return await _userManager.CreateAsync(user, password);
@@ -44,7 +51,7 @@ namespace Viajes.Web.Helpers
             }
         }
 
-        public async Task<UserEntity> GetUserByEmailAsync(string email)
+        public async Task<UserEntity> GetUserAsync(string email)
         {
             return await _userManager.FindByEmailAsync(email);
         }
