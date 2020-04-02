@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Threading.Tasks;
+using Viajes.Common.Enums;
 using Viajes.Web.Data.Entities;
 using Viajes.Web.Models;
 
@@ -23,9 +24,58 @@ namespace Viajes.Web.Helpers
             _signInManager = signInManager;
 
         }
+        public async Task<IdentityResult> ConfirmEmailAsync(UserEntity user, string token)
+        {
+            return await _userManager.ConfirmEmailAsync(user, token);
+        }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(UserEntity user)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+        public async Task<UserEntity> AddUserAsync(AddUserViewModel model)
+        {
+            UserEntity userEntity = new UserEntity
+            {
+              
+                Document = model.Document,
+                Email = model.Username,
+                FirstName = model.FirstName,
+                LastName = model.LastName,               
+                PhoneNumber = model.PhoneNumber,
+                UserName = model.Username,
+                UserType = model.UserTypeId == 1 ? UserType.Admin : UserType.User
+
+            };
+
+            IdentityResult result = await _userManager.CreateAsync(userEntity, model.Password);
+            if (result != IdentityResult.Success)
+            {
+                return null;
+            }
+
+            UserEntity newUser = await GetUserAsync(model.Username);
+            await AddUserToRoleAsync(newUser, userEntity.UserType.ToString());
+            return newUser;
+        }
+        public async Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(UserEntity user)
+        {
+            return await _userManager.UpdateAsync(user);
+        }
+
         public async Task<UserEntity> GetUserAsync(Guid userId)
         {
             return await _userManager.FindByIdAsync(userId.ToString());
+        }
+
+        public async Task<SignInResult> ValidatePasswordAsync(UserEntity user, string password)
+        {
+            return await _signInManager.CheckPasswordSignInAsync(user, password, false);
         }
 
 

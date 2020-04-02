@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using Viajes.Web.Helpers;
 namespace Viajes.Web.Controllers.API
 {
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class TripsController : ControllerBase
     {
@@ -38,13 +40,13 @@ namespace Viajes.Web.Controllers.API
                 return BadRequest("User doesn't exists.");
             }
 
-          
-          
+
+
             TripEntity TripEntity = new TripEntity
             {
                 StartDateTrip = tripRequest.StartDateTrip,
                 EndDateTrip = tripRequest.EndDateTrip,
-                DestinyCity=tripRequest.DestinyCity,
+                DestinyCity = tripRequest.DestinyCity,
                 TripDetails = new List<TripDetailEntity>
                 {
                     new TripDetailEntity
@@ -62,8 +64,8 @@ namespace Viajes.Web.Controllers.API
                             }
 
                         }
-                       
-                    
+
+
                     }
                 },
                 User = userEntity,
