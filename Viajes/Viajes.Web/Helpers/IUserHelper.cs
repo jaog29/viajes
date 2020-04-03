@@ -9,6 +9,8 @@ namespace Viajes.Web.Helpers
 {
     public interface IUserHelper
     {
+        Task<string> GeneratePasswordResetTokenAsync(UserEntity user);
+        Task<IdentityResult> ResetPasswordAsync(UserEntity user, string token, string password);
         Task<string> GenerateEmailConfirmationTokenAsync(UserEntity user);
         Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword);
 
