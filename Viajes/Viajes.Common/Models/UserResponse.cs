@@ -19,7 +19,7 @@ namespace Viajes.Common.Models
 
         public string LastName { get; set; }
 
-        public string PicturePath { get; set; }
+       // public string PicturePath { get; set; }
 
         public UserType UserType { get; set; }
 

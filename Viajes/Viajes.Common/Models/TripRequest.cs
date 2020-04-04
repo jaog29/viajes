@@ -30,7 +30,7 @@ namespace Viajes.Common.Models
         public string Origin { get; set; }
 
         public string Description { get; set; }
-        public string ReceiptPath { get; set; }
+        public string PicturePath { get; set; }
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public float Value { get; set; }
 

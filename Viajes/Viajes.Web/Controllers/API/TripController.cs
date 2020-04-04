@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,6 +25,48 @@ namespace Viajes.Web.Controllers.API
             _context = context;
             _userHelper = userHelper;
             _converterHelper = converterHelper;
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTripEntity([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var tripEntity = await _context.Trips
+                .Include(t => t.TripDetails)
+                .ThenInclude(td => td.Costs)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (tripEntity == null)
+            {
+                return NotFound();
+            }
+
+            _context.Trips.Remove(tripEntity);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTripEntity([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            TripEntity tripEntity = await _context.Trips
+                .Include(t => t.TripDetails)
+                .ThenInclude(td=>td.Costs)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (tripEntity == null)
+            {
+                return BadRequest("Trip not found.");
+            }
+
+            return Ok(_converterHelper.ToTripResponse(tripEntity));
         }
 
         [HttpPost]
@@ -53,7 +96,7 @@ namespace Viajes.Web.Controllers.API
                     {
                         Origin =tripRequest.Origin,
                         Description=tripRequest.Description,
-                        PicturePath=tripRequest.ReceiptPath,
+                        PicturePath=tripRequest.PicturePath,
                         Costs=new List<CostEntity>
                         {
                             new CostEntity
