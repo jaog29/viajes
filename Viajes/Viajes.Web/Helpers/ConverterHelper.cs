@@ -44,7 +44,7 @@ namespace Viajes.Web.Helpers
             };
         }
 
-        private UserResponse ToUserResponse(UserEntity user)
+        public UserResponse ToUserResponse(UserEntity user)
         {
             if (user == null)
             {
