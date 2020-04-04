@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Viajes.Common.Models;
 using Viajes.Web.Data.Entities;
@@ -26,6 +27,47 @@ namespace Viajes.Web.Controllers.API
             _userHelper = userHelper;
             _converterHelper = converterHelper;
         }
+        [HttpPost]
+        [Route("AddCost")]
+        public async Task<IActionResult>AddCost([FromBody] CostsTripRequest costsTripRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (costsTripRequest.Costs == null || costsTripRequest.Costs.Count == 0)
+            {
+                return NoContent();
+            }
+              TripDetailEntity tripDetail = await _context.TripDetails
+                .Include(t => t.Costs)
+                .FirstOrDefaultAsync(t => t.Id == costsTripRequest.Costs.FirstOrDefault().Id);
+            if (tripDetail == null)
+            {
+                return BadRequest("Trip not found.");
+            }
+
+            if (tripDetail.Costs == null)
+            {
+                tripDetail.Costs = new List<CostEntity>();
+            }
+
+            foreach (CostTripRequest costTripRequest in costsTripRequest.Costs )
+            {
+                tripDetail.Costs.Add(new CostEntity
+                {
+                  Value=costTripRequest.Value,
+                  Category=costTripRequest.Category,
+                    CreatedDate = DateTime.UtcNow
+                });
+            }
+
+            _context.TripDetails.Update(tripDetail);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTripEntity([FromRoute] int id)
         {

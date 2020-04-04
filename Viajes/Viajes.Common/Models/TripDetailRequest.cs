@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,3 +14,4 @@ namespace Viajes.Common.Models
         public List<CostResponse> Costs { get; set; }
     }
 }
+*/
