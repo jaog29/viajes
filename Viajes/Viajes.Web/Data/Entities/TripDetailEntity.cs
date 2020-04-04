@@ -10,7 +10,7 @@ namespace Viajes.Web.Data.Entities
         public string Origin { get; set; }
 
         public string Description { get; set; }
-        public string ReceiptPath { get; set; }
+        public string PicturePath { get; set; }
         public TripEntity Trip { get; set; }
         public ICollection<CostEntity> Costs { get; set; }
 

@@ -53,7 +53,7 @@ namespace Viajes.Web.Controllers.API
                     {
                         Origin =tripRequest.Origin,
                         Description=tripRequest.Description,
-                        ReceiptPath=tripRequest.ReceiptPath,
+                        PicturePath=tripRequest.ReceiptPath,
                         Costs=new List<CostEntity>
                         {
                             new CostEntity

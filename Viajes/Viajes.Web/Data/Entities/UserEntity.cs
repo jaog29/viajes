@@ -22,8 +22,8 @@ namespace Viajes.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string LastName { get; set; }
 
-        [Display(Name = "Image")]
-        public string PicturePath { get; set; }
+        /*[Display(Name = "Image")]
+        public string PicturePath { get; set; }*/
 
         [Display(Name = "User Type")]
         public UserType UserType { get; set; }

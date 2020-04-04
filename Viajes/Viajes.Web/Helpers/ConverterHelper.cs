@@ -25,7 +25,7 @@ namespace Viajes.Web.Helpers
                     Id = t.Id,
                     Origin = t.Origin,
                     Description = t.Description,
-                    ReceiptPath = t.ReceiptPath,
+                    ReceiptPath = t.PicturePath,
 
                     Costs = t.Costs?.Select(td => new CostResponse
                     {
@@ -60,7 +60,6 @@ namespace Viajes.Web.Helpers
                 Id = user.Id,
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
-                PicturePath = user.PicturePath,
                 UserType = user.UserType
             };
         }

@@ -90,7 +90,7 @@ namespace Viajes.Web.Data
                 {
                 Origin="Medellin",
                 Description="Se realiza el viaje para cerrar negocios y visitar la familia",
-                ReceiptPath="gsfgg/cdrgt/veg.jpg",
+                PicturePath="gsfgg/cdrgt/veg.jpg",
                 Costs=new List<CostEntity>
                 {
                     new CostEntity
@@ -126,7 +126,7 @@ namespace Viajes.Web.Data
                 {
                 Origin="Medellin",
                 Description="Se realiza el viaje para un acompañamiento y publicidad de la marca",
-                ReceiptPath="gsfgg/cdrgt/veg.jpg",
+                PicturePath="gsfgg/cdrgt/veg.jpg",
                 Costs=new List<CostEntity>
                 {
                     new CostEntity
@@ -161,7 +161,7 @@ namespace Viajes.Web.Data
                 {
                 Origin="Bogota",
                 Description="Se realiza el viaje por vacaciones y turismo",
-                ReceiptPath="gsfgg/cdrgt/veg.jpg",
+                PicturePath="gsfgg/cdrgt/veg.jpg",
                 Costs=new List<CostEntity>
                 {
                     new CostEntity
@@ -202,7 +202,7 @@ namespace Viajes.Web.Data
                 {
                 Origin="Medellin",
                 Description="Se realiza el viaje para cerrar negocio de exportacion",
-                ReceiptPath="gsfgg/cdrgt/veg.jpg",
+                PicturePath="gsfgg/cdrgt/veg.jpg",
                 Costs=new List<CostEntity>
                 {
                     new CostEntity
