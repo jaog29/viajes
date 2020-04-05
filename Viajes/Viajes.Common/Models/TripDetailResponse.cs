@@ -10,7 +10,7 @@ namespace Viajes.Common.Models
         public string Origin { get; set; }
         public string Description { get; set; }
         public string PicturePath { get; set; }
-
+        public TripResponse Trip { get; set; }
         public List<CostResponse> Costs{ get; set; }
        
     }

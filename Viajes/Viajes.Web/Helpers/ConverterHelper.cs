@@ -44,6 +44,9 @@ namespace Viajes.Web.Helpers
             };
         }
 
+     
+
+
         public UserResponse ToUserResponse(UserEntity user)
         {
             if (user == null)
@@ -61,6 +64,50 @@ namespace Viajes.Web.Helpers
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
                 UserType = user.UserType
+            };
+        }
+        public List<TripResponseWithUser> ToTripResponse(List<TripEntity> tripEntities)
+        {
+            return tripEntities.Select(t => new TripResponseWithUser
+            {
+                Id = t.Id,
+                DestinyCity = t.DestinyCity,
+                StartDate = t.StartDateTrip,
+                EndDate = t.EndDateTrip,
+                TripDetails = t.TripDetails.Select(td => new TripDetailResponse
+                {
+
+
+                    Id = td.Id,
+                    Origin = td.Origin,
+                    Description = td.Description,
+                    PicturePath = td.PicturePath,
+                    Trip = ToTripResponse2(td.Trip),
+                    Costs = td.Costs.Select(tc => new CostResponse
+                    {
+
+                        Id = tc.Id,
+                        Value = tc.Value,
+                        Category = tc.Category,
+                        CreatedDate = tc.CreatedDate
+                        
+                    }).ToList()
+
+                }).ToList()
+
+
+            }).ToList();
+        }
+
+        private TripResponse ToTripResponse2(TripEntity trips)
+        {
+            return new TripResponse
+            {
+               Id = trips.Id,
+               StartDate=trips.StartDateTrip,
+               EndDate=trips.EndDateTrip,
+               DestinyCity=trips.DestinyCity,
+                User = ToUserResponse(trips.User)
             };
         }
     }

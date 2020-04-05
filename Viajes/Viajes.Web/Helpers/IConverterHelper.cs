@@ -9,7 +9,7 @@ namespace Viajes.Web.Helpers
 {
     public interface IConverterHelper
     {
-
+        List<TripResponseWithUser> ToTripResponse(List<TripEntity> tripEntities);
         TripResponse ToTripResponse(TripEntity tripEntity);
         UserResponse ToUserResponse(UserEntity user);
 

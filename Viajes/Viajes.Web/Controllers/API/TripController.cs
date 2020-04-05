@@ -160,6 +160,32 @@ namespace Viajes.Web.Controllers.API
             await _context.SaveChangesAsync();
             return Ok(_converterHelper.ToTripResponse(TripEntity));
         }
+        [HttpPost]
+        [Route("GetMyTrips")]
+        public async Task<IActionResult> GetMyTrips([FromBody] MyTripsRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var tripEntities = await _context.Trips
+                
+                .Include(t => t.User)
+               //.ThenInclude(t => t.Trip)
+                .Include(t => t.TripDetails)
+                  
+                .ThenInclude(td => td.Costs)
+                
+               
+                .Where(t => t.User.Id == request.UserId &&
+                            t.StartDateTrip >= request.StartDate &&
+                            t.EndDateTrip <= request.EndDate)
+                .OrderByDescending(t => t.StartDateTrip)
+                .ToListAsync();
+
+            return Ok(_converterHelper.ToTripResponse(tripEntities));
+        }
     }
 }
 

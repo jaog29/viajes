@@ -11,8 +11,7 @@ namespace Viajes.Common.Models
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
-        public string DestinyCity { get; set; }
-        public string Origin { get; set; }
+
     }
 }
 

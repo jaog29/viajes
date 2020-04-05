@@ -27,6 +27,7 @@ namespace Viajes.Web.Data.Entities
 
         [Display(Name = "User Type")]
         public UserType UserType { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
 
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";
 
