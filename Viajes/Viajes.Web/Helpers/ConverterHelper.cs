@@ -26,7 +26,7 @@ namespace Viajes.Web.Helpers
                     Origin = t.Origin,
                     Description = t.Description,
                     PicturePath = t.PicturePath,
-
+                 
                     Costs = t.Costs?.Select(td => new CostResponse
                     {
 
@@ -74,6 +74,7 @@ namespace Viajes.Web.Helpers
                 DestinyCity = t.DestinyCity,
                 StartDate = t.StartDateTrip,
                 EndDate = t.EndDateTrip,
+                
                 TripDetails = t.TripDetails.Select(td => new TripDetailResponse
                 {
 
@@ -107,6 +108,7 @@ namespace Viajes.Web.Helpers
                StartDate=trips.StartDateTrip,
                EndDate=trips.EndDateTrip,
                DestinyCity=trips.DestinyCity,
+               
                 User = ToUserResponse(trips.User)
             };
         }

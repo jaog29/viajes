@@ -17,8 +17,6 @@ namespace Viajes.Common.Models
 
         public string DestinyCity { get; set; }
 
-      
-
         public List<TripDetailResponse> TripDetails { get; set; }
         public UserResponse User { get; set; }
 

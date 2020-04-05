@@ -172,12 +172,11 @@ namespace Viajes.Web.Controllers.API
             var tripEntities = await _context.Trips
                 
                 .Include(t => t.User)
-               //.ThenInclude(t => t.Trip)
-                .Include(t => t.TripDetails)
-                  
-                .ThenInclude(td => td.Costs)
-                
+            
+                 .Include(t => t.TripDetails)
                
+                .ThenInclude(td => td.Costs)
+            
                 .Where(t => t.User.Id == request.UserId &&
                             t.StartDateTrip >= request.StartDate &&
                             t.EndDateTrip <= request.EndDate)
