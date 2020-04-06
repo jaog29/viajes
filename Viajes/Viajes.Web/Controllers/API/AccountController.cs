@@ -13,6 +13,7 @@ using Viajes.Web.Resources;
 
 namespace Viajes.Web.Controllers.API
 {
+    //'borrrar'
     [Route("api/[Controller]")]
     public class AccountController : ControllerBase
     {
