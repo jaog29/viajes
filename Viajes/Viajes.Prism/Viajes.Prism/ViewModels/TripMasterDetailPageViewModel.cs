@@ -1,19 +1,37 @@
-﻿using Prism.Navigation;
+﻿using Newtonsoft.Json;
+using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Viajes.Common.Helpers;
 using Viajes.Common.Models;
+using Viajes.Prism.Helpers;
 
 namespace Viajes.Prism.ViewModels
 {
     public class TripMasterDetailPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
+        private UserResponse _user;
 
         public TripMasterDetailPageViewModel(INavigationService navigationService) : base(navigationService)
         {
+            LoadUser();
+
             _navigationService = navigationService;
             LoadMenus();
+        }
+        public UserResponse User
+        {
+            get => _user;
+            set => SetProperty(ref _user, value);
+        }
+private void LoadUser()
+        {
+            if (Settings.IsLogin)
+            {
+                User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            }
         }
 
         public ObservableCollection<MenuItemViewModel> Menus { get; set; }
@@ -56,7 +74,8 @@ namespace Viajes.Prism.ViewModels
                 {
                     Icon = "ic_login",
                     PageName = "LoginPage",
-                    Title = "Log in"
+                        Title = Settings.IsLogin ? Languages.Logout : Languages.Login
+
                 }
             };
 

@@ -1,39 +1,46 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
-using System;
-using System.Text.RegularExpressions;
 using Viajes.Common.Models;
 using Viajes.Common.Services;
+using Viajes.Prism.Helpers;
 
 namespace Viajes.Prism.ViewModels
 {
- 
-        public class TripHistoryPageViewModel : ViewModelBase
-        {
-            private readonly IApiService _apiService;
-            private TripResponse _trip;
-            private DelegateCommand _CheckDestinyCommand;
 
-            public TripHistoryPageViewModel(
+    public class TripHistoryPageViewModel : ViewModelBase
+    {
+        private readonly IApiService _apiService;
+        private TripResponse _trip;
+        private DelegateCommand _CheckDestinyCommand;
+        private bool _isRunning;
+
+        public bool IsRunning
+        {
+            get => _isRunning;
+            set => SetProperty(ref _isRunning, value);
+        }
+
+        public TripHistoryPageViewModel(
                 INavigationService navigationService,
                 IApiService apiService) : base(navigationService)
-            {
-                _apiService = apiService;
-                Title = "Trip History";
-            }
+        {
+            _apiService = apiService;
+            Title = Languages.TripHistory;
 
-            public TripResponse Trip
-            {
-                get => _trip;
-                set => SetProperty(ref _trip, value);
-            }
+        }
 
-            public int id { get; set; }
+        public TripResponse Trip
+        {
+            get => _trip;
+            set => SetProperty(ref _trip, value);
+        }
 
-            public DelegateCommand CheckDestinyCommand => _CheckDestinyCommand ?? (_CheckDestinyCommand = new DelegateCommand(CheckDestinyAsync));
+        public int id { get; set; }
 
-            private async void CheckDestinyAsync()
-            {
+        public DelegateCommand CheckDestinyCommand => _CheckDestinyCommand ?? (_CheckDestinyCommand = new DelegateCommand(CheckDestinyAsync));
+
+        private async void CheckDestinyAsync()
+        {
 
             /*if (string.IsNullOrEmpty(id))
             {
@@ -46,21 +53,23 @@ namespace Viajes.Prism.ViewModels
 
 
 
+            IsRunning = true;
 
             string url = App.Current.Resources["UrlAPI"].ToString();
-                Response response = await _apiService.GetTripAsync(id,url, "api", "/trip");
-                if (!response.IsSuccess)
-                {
-                    await App.Current.MainPage.DisplayAlert(
-                        "Error",
-                        response.Message,
-                        "Accept");
-                    return;
-                }
-
-                Trip = (TripResponse)response.Result;
+            Response response = await _apiService.GetTripAsync(id, url, "api", "/trip");
+            IsRunning = false;
+            if (!response.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert(
+                    "Error",
+                    response.Message,
+                    "Accept");
+                return;
             }
+
+            Trip = (TripResponse)response.Result;
         }
     }
+}
 
 

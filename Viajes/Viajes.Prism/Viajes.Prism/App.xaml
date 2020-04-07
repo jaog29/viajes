@@ -16,7 +16,7 @@
             <Color x:Key="ColorDanger">#EB5937</Color>
             <Color x:Key="ColorAccent">#030BA6</Color>
             <Color x:Key="ColorFont">#595959</Color>
-            <Color x:Key="ColorFontInverse">#000000</Color>
+            <Color x:Key="ColorFontInverse">#F2F2F2</Color>
             <!-- Styles -->
             <Style TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}" />
