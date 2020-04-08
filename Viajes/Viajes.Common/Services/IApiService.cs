@@ -10,7 +10,7 @@ namespace Viajes.Common.Services
         Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
 
         Task<Response> GetUserByEmail(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, EmailRequest request);
-
+        Task<bool> CheckConnectionAsync(string url);
     }
 
 }

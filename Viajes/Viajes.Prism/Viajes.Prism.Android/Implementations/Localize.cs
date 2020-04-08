@@ -11,7 +11,7 @@ namespace   Viajes.Prism.Droid.Implementations
     {
         public CultureInfo GetCurrentCultureInfo()
         {
-            string netLanguage = "es";
+            string netLanguage = "en";
             Java.Util.Locale androidLocale = Java.Util.Locale.Default;
             netLanguage = AndroidToDotnetLanguage(androidLocale.ToString().Replace("_", "-"));
             // this gets called a lot - try/catch can be expensive so consider caching or something

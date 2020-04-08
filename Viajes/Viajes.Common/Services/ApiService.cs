@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Connectivity;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -50,7 +51,15 @@ namespace Viajes.Common.Services
                 };
             }
         }
+        public async Task<bool> CheckConnectionAsync(string url)
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                return false;
+            }
 
+            return await CrossConnectivity.Current.IsRemoteReachable(url);
+        }
         public async Task<Response> GetUserByEmail(
             string urlBase,
             string servicePrefix,

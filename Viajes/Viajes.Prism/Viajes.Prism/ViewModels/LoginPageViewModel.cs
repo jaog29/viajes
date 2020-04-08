@@ -75,7 +75,7 @@ namespace Viajes.Prism.ViewModels
             IsEnabled = false;
 
             string url = App.Current.Resources["UrlAPI"].ToString();
-          /*  bool connection = await _apiService.CheckConnectionAsync(url);
+            bool connection = await _apiService.CheckConnectionAsync(url);
             if (!connection)
             {
                 IsRunning = false;
@@ -83,11 +83,12 @@ namespace Viajes.Prism.ViewModels
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }
-            */
+            
             TokenRequest request = new TokenRequest
             {
-                Password = Password,
-                Username = Email
+                Username = Email,
+                Password = Password
+             
             };
 
             Response response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
@@ -118,7 +119,7 @@ namespace Viajes.Prism.ViewModels
             IsRunning = false;
             IsEnabled = true;
 
-            await _navigationService.NavigateAsync("/TaxiMasterDetailPage/NavigationPage/HomePage");
+            await _navigationService.NavigateAsync("/TripMasterDetailPage/NavigationPage/MainPage");
             Password = string.Empty;
         
 
