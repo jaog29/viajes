@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Viajes.Common.Helpers;
 using Viajes.Common.Models;
+using Viajes.Common.Services;
 using Viajes.Prism.Helpers;
 
 namespace Viajes.Prism.ViewModels
@@ -13,14 +14,45 @@ namespace Viajes.Prism.ViewModels
     {
         private readonly INavigationService _navigationService;
         private UserResponse _user;
+        private readonly IApiService _apiService;
+        private static TripMasterDetailPageViewModel _instance;
 
-        public TripMasterDetailPageViewModel(INavigationService navigationService) : base(navigationService)
+        public TripMasterDetailPageViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
         {
-            LoadUser();
-
+            _instance = this;
+            _apiService = apiService;
             _navigationService = navigationService;
+            LoadUser();
             LoadMenus();
         }
+        public static TripMasterDetailPageViewModel GetInstance()
+        {
+            return _instance;
+        }
+
+        public async void ReloadUser()
+        {
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                return;
+            }
+
+            UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            EmailRequest emailRequest = new EmailRequest
+            {
+                CultureInfo = Languages.Culture,
+                Email = user.Email
+            };
+
+            Response response = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, emailRequest);
+            UserResponse userResponse = (UserResponse)response.Result;
+            Settings.User = JsonConvert.SerializeObject(userResponse);
+            LoadUser();
+        }
+
         public UserResponse User
         {
             get => _user;
