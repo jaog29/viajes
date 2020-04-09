@@ -15,8 +15,9 @@
             <Image HeightRequest="150"
                    Margin="0,20,0,0"
                    Source="Trips"/>
-            <Grid Margin="20" 
-                  VerticalOptions="CenterAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                
+            <Grid Margin="20" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="3*"/>
@@ -44,15 +45,25 @@
                        Placeholder="{i18n:Translate PasswordPlaceHolder}"
                        Text="{Binding Password}"/>
             </Grid>
-            <StackLayout>
-                <Button Command="{Binding LoginCommand}" 
+            <Label FontAttributes="Bold"
+            HorizontalOptions="Center" 
+            Text="{i18n:Translate ForgotPassword}"
+            TextColor="{StaticResource ColorAccent}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+
+        <StackLayout>
+            <Button Command="{Binding LoginCommand}" 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate LogIn}"/>
-                <Button Command="{Binding RegisterCommand}" 
+            <Button Command="{Binding RegisterCommand}" 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate Register}"
                         Style="{StaticResource DangerButton}"/>
-            </StackLayout>
+        </StackLayout>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="MovieTimer" 
                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"

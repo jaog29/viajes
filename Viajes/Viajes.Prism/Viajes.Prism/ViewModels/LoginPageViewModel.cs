@@ -18,6 +18,7 @@ namespace Viajes.Prism.ViewModels
             private DelegateCommand _registerCommand;
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
+        private DelegateCommand _forgotPasswordCommand;
 
         public LoginPageViewModel(INavigationService navigationService, IApiService apiService) 
             : base(navigationService)
@@ -28,8 +29,9 @@ namespace Viajes.Prism.ViewModels
             Title = Languages.Login;
                 IsEnabled = true;
             }
+        public DelegateCommand ForgotPasswordCommand => _forgotPasswordCommand ?? (_forgotPasswordCommand = new DelegateCommand(ForgotPasswordAsync));
 
-            public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(LoginAsync));
+        public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(LoginAsync));
 
             public DelegateCommand RegisterCommand => _registerCommand ?? (_registerCommand = new DelegateCommand(RegisterAsync));
 
@@ -52,6 +54,11 @@ namespace Viajes.Prism.ViewModels
                 get => _password;
                 set => SetProperty(ref _password, value);
             }
+        private async void ForgotPasswordAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(RememberPasswordPage));
+        }
+
 
         private async void LoginAsync()
         {
