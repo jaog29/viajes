@@ -90,6 +90,7 @@ namespace Viajes.Web.Controllers
             {
                
                 _context.Update(tripEntity);
+       
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -110,17 +111,18 @@ namespace Viajes.Web.Controllers
             {
                 return NotFound();
             }
-
+         
             _context.Trips.Remove(tripEntity);
+         
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         // POST: Trips/Delete/5
 
-        private bool TripEntityExists(int id)
+       /* private bool TripEntityExists(int id)
         {
             return _context.Trips.Any(e => e.Id == id);
-        }
+        }*/
     }
 }
