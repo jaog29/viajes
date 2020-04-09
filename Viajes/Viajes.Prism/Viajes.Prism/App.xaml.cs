@@ -1,6 +1,7 @@
 ﻿    using Prism;
 using Prism.Ioc;
 using Syncfusion.Licensing;
+using Viajes.Common.Helpers;
 using Viajes.Common.Services;
 using Viajes.Prism.ViewModels;
 using Viajes.Prism.Views;
@@ -31,6 +32,7 @@ namespace Viajes.Prism
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.Register< IApiService,ApiService>();
+            containerRegistry.Register<IRegexHelper, RegexHelper>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<TripMasterDetailPage, TripMasterDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<NewTripDetailPage, NewTripDetailPageViewModel>();

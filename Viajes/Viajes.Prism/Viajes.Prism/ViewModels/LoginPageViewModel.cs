@@ -5,6 +5,7 @@ using Viajes.Common.Helpers;
 using Viajes.Common.Models;
 using Viajes.Common.Services;
 using Viajes.Prism.Helpers;
+using Viajes.Prism.Views;
 
 namespace Viajes.Prism.ViewModels
 {
@@ -52,25 +53,25 @@ namespace Viajes.Prism.ViewModels
                 set => SetProperty(ref _password, value);
             }
 
-            private async void LoginAsync()
+        private async void LoginAsync()
+        {
+            if (string.IsNullOrEmpty(Email))
             {
-                if (string.IsNullOrEmpty(Email))
-                {
-                    await App.Current.MainPage.DisplayAlert(
-                        Languages.Error,
-                        Languages.EmailError,
-                        Languages.Accept);
-                    return;
-                }
+                await App.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.EmailError,
+                    Languages.Accept);
+                return;
+            }
 
-                if (string.IsNullOrEmpty(Password))
-                {
-                    await App.Current.MainPage.DisplayAlert(
-                        Languages.Error,
-                        Languages.PasswordError,
-                        Languages.Accept);
-                    return;
-                }
+            if (string.IsNullOrEmpty(Password))
+            {
+                await App.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.PasswordError,
+                    Languages.Accept);
+                return;
+            }
             IsRunning = true;
             IsEnabled = false;
 
@@ -83,12 +84,12 @@ namespace Viajes.Prism.ViewModels
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }
-            
+
             TokenRequest request = new TokenRequest
             {
                 Username = Email,
                 Password = Password
-             
+
             };
 
             Response response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
@@ -121,13 +122,13 @@ namespace Viajes.Prism.ViewModels
 
             await _navigationService.NavigateAsync("/TripMasterDetailPage/NavigationPage/MainPage");
             Password = string.Empty;
-        
 
 
-    }
 
-    private void RegisterAsync()
-            {
-            }
+        }
+        private async void RegisterAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(RegisterPage));
         }
     }
+}

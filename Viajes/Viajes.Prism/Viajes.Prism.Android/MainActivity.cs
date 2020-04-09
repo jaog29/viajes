@@ -7,7 +7,12 @@ using Syncfusion.SfBusyIndicator.XForms.Droid;
 
 namespace Viajes.Prism.Droid
 {
-    [Activity(Label = "Viajes", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Viajes", Icon = "@mipmap/ic_launcher", 
+        Theme = "@style/MainTheme", 
+        MainLauncher = false,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+
+
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -18,6 +23,8 @@ namespace Viajes.Prism.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+
             new SfBusyIndicatorRenderer();
      
 

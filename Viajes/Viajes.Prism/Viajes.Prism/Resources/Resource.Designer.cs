@@ -691,7 +691,7 @@ namespace Viajes.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Taxi History.
+        ///   Looks up a localized string similar to Trip History.
         /// </summary>
         internal static string TripHistory {
             get {

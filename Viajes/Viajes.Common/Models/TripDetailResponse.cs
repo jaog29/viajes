@@ -12,6 +12,10 @@ namespace Viajes.Common.Models
         public string PicturePath { get; set; }
         public TripResponse Trip { get; set; }
         public List<CostResponse> Costs{ get; set; }
-       
+        public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
+     ? "https://viajeswebproject1.azurewebsites.net//images/noimage.png"
+     : $"https://viajeswebproject1.azurewebsites.net{PicturePath.Substring(1)}";
+
+
     }
 }
