@@ -7,12 +7,14 @@ using Viajes.Common.Helpers;
 using Viajes.Common.Models;
 using Viajes.Common.Services;
 using Viajes.Prism.Helpers;
+using Viajes.Prism.Views;
 
 namespace Viajes.Prism.ViewModels
 {
     public class ModifyUserPageViewModel : ViewModelBase
     {
-       //private readonly IFilesHelper _filesHelper;
+        private DelegateCommand _changePasswordCommand;
+        //private readonly IFilesHelper _filesHelper;
         private readonly IApiService _apiService;
         private bool _isRunning;
         private bool _isEnabled;
@@ -21,7 +23,7 @@ namespace Viajes.Prism.ViewModels
         //private MediaFile _file;
        // private DelegateCommand _changeImageCommand;
         private DelegateCommand _saveCommand;
-
+        private readonly INavigationService _navigationService;
         public ModifyUserPageViewModel(INavigationService navigationService,IApiService apiService)
             : base(navigationService)
         {
@@ -29,9 +31,12 @@ namespace Viajes.Prism.ViewModels
             IsEnabled = true;
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
             //_filesHelper = filesHelper;
+            _navigationService = navigationService;
             _apiService = apiService;
             //Image = User.PictureFullPath;
         }
+        public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePasswordAsync));
+
 
         //public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
 
@@ -60,6 +65,11 @@ namespace Viajes.Prism.ViewModels
             get => _isEnabled;
             set => SetProperty(ref _isEnabled, value);
         }
+        private async void ChangePasswordAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
+        }
+
 
         private async void SaveAsync()
         {
