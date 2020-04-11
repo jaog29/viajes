@@ -70,7 +70,7 @@ namespace Viajes.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAdd Details to Trip.
+        ///   Looks up a localized string similar to Add Details to Trip.
         /// </summary>
         internal static string AddDetailstoTrip {
             get {
@@ -687,6 +687,15 @@ namespace Viajes.Prism.Resources {
         internal static string StartTrip {
             get {
                 return ResourceManager.GetString("StartTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to travel has been recorded .
+        /// </summary>
+        internal static string successful {
+            get {
+                return ResourceManager.GetString("successful", resourceCulture);
             }
         }
         

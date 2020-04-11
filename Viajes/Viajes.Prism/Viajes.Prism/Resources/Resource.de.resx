@@ -339,4 +339,7 @@
   <data name="Admin" xml:space="preserve">
     <value>Admintra</value>
   </data>
+  <data name="successful" xml:space="preserve">
+    <value>Reise wurde aufgezeichnet</value>
+  </data>
 </root>

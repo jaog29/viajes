@@ -81,7 +81,7 @@ namespace Viajes.Prism.Helpers
         public static string RegisterAsPlaceHolder => Resource.RegisterAsPlaceHolder;
 
         public static string PasswordConfirm => Resource.PasswordConfirm;
-
+        public static string successful => Resource.successful;
         public static string PasswordConfirmError1 => Resource.PasswordConfirmError1;
 
         public static string PasswordConfirmError2 => Resource.PasswordConfirmError2;

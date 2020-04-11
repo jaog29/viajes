@@ -33,6 +33,7 @@ namespace Viajes.Prism
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.Register< IApiService,ApiService>();
             containerRegistry.Register<IRegexHelper, RegexHelper>();
+            containerRegistry.Register<IFilesHelper, FilesHelper>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<TripMasterDetailPage, TripMasterDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<NewTripDetailPage, NewTripDetailPageViewModel>();

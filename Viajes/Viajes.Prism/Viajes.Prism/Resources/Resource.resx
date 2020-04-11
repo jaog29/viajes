@@ -168,11 +168,14 @@
   <data name="NewTrip" xml:space="preserve">
     <value>New trip</value>
   </data>
+  <data name="successful" xml:space="preserve">
+    <value>travel has been recorded </value>
+  </data>
   <data name="SeeTripHistory" xml:space="preserve">
     <value>See trip history</value>
   </data>
   <data name="AddDetailstoTrip" xml:space="preserve">
-    <value>AAdd Details to Trip</value>
+    <value>Add Details to Trip</value>
   </data>
   <data name="ModifyUser" xml:space="preserve">
     <value>Modify user</value>

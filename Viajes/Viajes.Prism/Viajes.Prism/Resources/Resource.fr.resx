@@ -339,4 +339,7 @@
   <data name="Admin" xml:space="preserve">
     <value>Admintracione</value>
   </data>
+  <data name="successful" xml:space="preserve">
+    <value>le voyage a été enregistré</value>
+  </data>
 </root>

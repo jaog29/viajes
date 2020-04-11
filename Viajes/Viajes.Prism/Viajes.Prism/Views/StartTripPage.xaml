@@ -7,7 +7,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:sys="clr-namespace:System;assembly=mscorlib" 
-             xmlns:sys1="clr-namespace:System;assembly=netstandard"
+             xmlns:sys1="clr-namespace:System;assembly=netstandard" xmlns:xaml="http://xamarin.com/schemas/2014/forms/design"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Viajes.Prism.Views.StartTripPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
@@ -28,6 +28,10 @@
                         <ffimageloading:CachedImage.Transformations>
                             <fftransformations:CircleTransformation />
                         </ffimageloading:CachedImage.Transformations>
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
+
                     </ffimageloading:CachedImage>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -52,32 +56,34 @@
                        HorizontalOptions="FillAndExpand" 
                        Text="{i18n:Translate StartDate}"
                        VerticalOptions="Center"/>
-                        
-                            
-                            <DatePicker  
-                                
+
+
+                        <DatePicker                                  
                                 Grid.Column="1"
                                             Grid.Row="0"
                                 VerticalOptions="Center"
                                     FontAttributes="Bold"
-                               BackgroundColor="WhiteSmoke" 
-                                  Date="{x:Static sys:DateTime.Now}">
-                                    
+                               BackgroundColor="WhiteSmoke"
+                        
+                         Date="{x:Static sys:DateTime.Now}"
+                            xaml:Date="{Binding StartDate}">
+                          
+
                             <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                                      
                                 <DatePicker.MinimumDate>
                                     <sys1:DateTime x:FactoryMethod="Parse">
                                         <x:Arguments>
-                                            <x:String>Jan 1 2000</x:String>
+                                        <x:String>Dec 1 2018</x:String>
                                         </x:Arguments>
                                     </sys1:DateTime>
                                 </DatePicker.MinimumDate>
                                 <DatePicker.MaximumDate>
                                     <sys1:DateTime x:FactoryMethod="Parse">
-                                        <x:Arguments>
-                                            <x:String>Dec 31 2050</x:String>
-                                        </x:Arguments>
-                                    </sys1:DateTime>
+                                    <x:Arguments>
+                                        <x:String>Dec 31 2021</x:String>
+                                    </x:Arguments>
+                                </sys1:DateTime>
                                 </DatePicker.MaximumDate>
                                 </DatePicker>
                         <Label Grid.Row="1" 
@@ -92,21 +98,23 @@
                                 VerticalOptions="Center"
                                     FontAttributes="Bold"
                                BackgroundColor="WhiteSmoke" 
-                                  Date="{x:Static sys:DateTime.Now}">
+                       
+                         Date="{x:Static sys:DateTime.Now}"
+                            xaml:Date="{Binding EndDate}">
 
                             <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
 
                             <DatePicker.MinimumDate>
                                 <sys1:DateTime x:FactoryMethod="Parse">
                                     <x:Arguments>
-                                        <x:String>Jan 1 2000</x:String>
+                                        <x:String>Dec 1 2018</x:String>
                                     </x:Arguments>
                                 </sys1:DateTime>
                             </DatePicker.MinimumDate>
                             <DatePicker.MaximumDate>
                                 <sys1:DateTime x:FactoryMethod="Parse">
                                     <x:Arguments>
-                                        <x:String>Dec 31 2050</x:String>
+                                        <x:String>Dec 31 2021</x:String>
                                     </x:Arguments>
                                 </sys1:DateTime>
                             </DatePicker.MaximumDate>
@@ -183,10 +191,14 @@
 
             <StackLayout Orientation="Horizontal">
                 <Button Command="{Binding StartTripCommand}" 
+                        IsVisible="False"
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate StartTrip }"/>
-                <Button Command="{Binding CancelTripCommand}" 
-                        IsVisible="{Binding IsSecondButtonVisible}"
+                <Button Command="{Binding SaveCommand}" 
+                        IsVisible="True"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate Save }"/>
+                <Button Command="{Binding CancelTripCommand}"                     
                         Style="{StaticResource DangerButton}"
                         Text="{i18n:Translate Cancel}"/>
             </StackLayout>
