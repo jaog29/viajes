@@ -1,15 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+           	 xmlns:i18n="clr-namespace:Viajes.Prism.Helpers"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Viajes.Prism.Views.MainPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Button 
-                    Command="{Binding NewTrip }"
-                    Margin="10,0"
-                    Text="Add new Trip with Expenses"/>
-    </StackLayout>
 
+
+    <StackLayout>
+        <Label Text="¡¡Welcome!!"
+          
+           HorizontalOptions="Center"
+               TextColor="Black"
+               FontSize="Title"
+               VerticalOptions="Center"/>
+        <ffimageloading:CachedImage x:Name="Picture" 
+                                               Aspect="AspectFill"
+                                                Source="Trips" 
+                                                CacheDuration= "50"
+                                               VerticalOptions="StartAndExpand"
+                                                Margin="0,20,0,0">
+            <ffimageloading:CachedImage.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding StartTripCommand}"/>
+            </ffimageloading:CachedImage.GestureRecognizers>
+            <ffimageloading:CachedImage.Transformations>
+
+            </ffimageloading:CachedImage.Transformations>
+        </ffimageloading:CachedImage>
+        <StackLayout Padding="10">
+            <Button Command="{Binding StartTripCommand}" 
+                    Margin="10,0"
+                    Text="{i18n:Translate StartTrip}"/>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>

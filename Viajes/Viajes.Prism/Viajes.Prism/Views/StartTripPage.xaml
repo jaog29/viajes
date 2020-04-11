@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+           	 xmlns:i18n="clr-namespace:Viajes.Prism.Helpers"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+             xmlns:sys1="clr-namespace:System;assembly=netstandard"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Viajes.Prism.Views.StartTripPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
+             Title="{Binding Title}">
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Padding="5">
+            <ScrollView>
+                <StackLayout>
+                    <ffimageloading:CachedImage Aspect="AspectFit"
+                                                Source="Trips" 
+                                                CacheDuration= "50"
+                                                HeightRequest="150"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <Label Grid.Row="0" 
+                       Grid.Column="0"
+                       HorizontalOptions="FillAndExpand" 
+                       Text="{i18n:Translate StartDate}"
+                       VerticalOptions="Center"/>
+                        
+                            
+                            <DatePicker  
+                                
+                                Grid.Column="1"
+                                            Grid.Row="0"
+                                VerticalOptions="Center"
+                                    FontAttributes="Bold"
+                               BackgroundColor="WhiteSmoke" 
+                                  Date="{x:Static sys:DateTime.Now}">
+                                    
+                            <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                                     
+                                <DatePicker.MinimumDate>
+                                    <sys1:DateTime x:FactoryMethod="Parse">
+                                        <x:Arguments>
+                                            <x:String>Jan 1 2000</x:String>
+                                        </x:Arguments>
+                                    </sys1:DateTime>
+                                </DatePicker.MinimumDate>
+                                <DatePicker.MaximumDate>
+                                    <sys1:DateTime x:FactoryMethod="Parse">
+                                        <x:Arguments>
+                                            <x:String>Dec 31 2050</x:String>
+                                        </x:Arguments>
+                                    </sys1:DateTime>
+                                </DatePicker.MaximumDate>
+                                </DatePicker>
+                        <Label Grid.Row="1" 
+                       Grid.Column="0"
+                       HorizontalOptions="FillAndExpand" 
+                       Text="{i18n:Translate EndDate}"
+                       VerticalOptions="Center"/>
+                        <DatePicker  
+                                
+                                Grid.Column="1"
+                                           Grid.Row="1"
+                                VerticalOptions="Center"
+                                    FontAttributes="Bold"
+                               BackgroundColor="WhiteSmoke" 
+                                  Date="{x:Static sys:DateTime.Now}">
+
+                            <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+
+                            <DatePicker.MinimumDate>
+                                <sys1:DateTime x:FactoryMethod="Parse">
+                                    <x:Arguments>
+                                        <x:String>Jan 1 2000</x:String>
+                                    </x:Arguments>
+                                </sys1:DateTime>
+                            </DatePicker.MinimumDate>
+                            <DatePicker.MaximumDate>
+                                <sys1:DateTime x:FactoryMethod="Parse">
+                                    <x:Arguments>
+                                        <x:String>Dec 31 2050</x:String>
+                                    </x:Arguments>
+                                </sys1:DateTime>
+                            </DatePicker.MaximumDate>
+                        </DatePicker>
+
+                        <Label Grid.Row="2" 
+                       Grid.Column="0"
+                       HorizontalOptions="FillAndExpand" 
+                       Text="{i18n:Translate Destiny}"
+                       VerticalOptions="Center"/>
+                        <Entry Grid.Row="2" 
+                       Grid.Column="1"
+                VerticalOptions="Center"
+                       Placeholder="{i18n:Translate Destiny}" 
+                       Text="{Binding Trip.Destiny}"/>
+
+
+                        <Label Grid.Row="3" 
+                       Grid.Column="0"
+                       HorizontalOptions="FillAndExpand" 
+                       Text="{i18n:Translate Origin}"
+                       VerticalOptions="Center"/>
+                        <Entry Grid.Row="3" 
+                       Grid.Column="1"
+                    
+                       HorizontalOptions="FillAndExpand"
+                       Placeholder="{i18n:Translate Origin}" 
+                       Text="{Binding Trip.Origin}"/>
+
+                        <Label Grid.Row="4" 
+                       Grid.Column="0"
+
+                       Text="{i18n:Translate Description}"
+                       VerticalOptions="Center"/>
+                        <Entry Grid.Row="4" 
+                       Grid.Column="1"
+
+                       Placeholder="{i18n:Translate Description}" 
+                       Text="{Binding Trip.Description}"/>
+
+                        <Label Grid.Row="5" 
+                       Grid.Column="0"
+                       HorizontalOptions="FillAndExpand" 
+                       Text="{i18n:Translate Value}"
+                       VerticalOptions="Center"/>
+                        <Entry Grid.Row="5" 
+                       Grid.Column="1"
+                   Keyboard="Numeric"
+                       Placeholder="{i18n:Translate Value}" 
+                       Text="{Binding Trip.Value}"/>
+
+                        <Label Grid.Row="6" 
+                       Grid.Column="0"
+                       HorizontalOptions="FillAndExpand" 
+                       Text="{i18n:Translate Category}"
+                       VerticalOptions="Center"/>
+                        <Entry Grid.Row="6" 
+                       Grid.Column="1"
+                  
+                       Placeholder="{i18n:Translate Category}" 
+                       Text="{Binding Trip.Category}"/>
+
+                    </Grid>
+                    <Label FontAttributes="Bold"
+            HorizontalOptions="Center" 
+            Text="{i18n:Translate AddDetailstoTrip}"
+            TextColor="{StaticResource ColorAccent}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddCostCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Command="{Binding StartTripCommand}" 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate StartTrip }"/>
+                <Button Command="{Binding CancelTripCommand}" 
+                        IsVisible="{Binding IsSecondButtonVisible}"
+                        Style="{StaticResource DangerButton}"
+                        Text="{i18n:Translate Cancel}"/>
+            </StackLayout>
+        </StackLayout>
+
+        <busyindicator:SfBusyIndicator AnimationType="MovieTimer" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="{i18n:Translate Loading}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
+</ContentPage>
