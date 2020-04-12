@@ -9,5 +9,5 @@ namespace Viajes.Common.Helpers
     {
         byte[] ReadFully(Stream input);
     }
-
 }
+

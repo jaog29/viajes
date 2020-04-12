@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,23 @@ namespace Viajes.Web.Helpers
 {
     public class ImageHelper : IImageHelper
     {
+        public async Task<string> UploadImageAsync(IFormFile imageFile, string folder)
+        {
+            string guid = Guid.NewGuid().ToString();
+            string file = $"{guid}.jpg";
+            string path = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                $"wwwroot\\images\\{folder}",
+                file);
+
+            using (FileStream stream = new FileStream(path, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
+
+            return $"~/images/{folder}/{file}";
+        }
+
         public string UploadImage(byte[] pictureArray, string folder)
         {
             MemoryStream stream = new MemoryStream(pictureArray);
@@ -27,7 +45,5 @@ namespace Viajes.Web.Helpers
 
             return $"~/images/{folder}/{file}";
         }
-
-
     }
 }

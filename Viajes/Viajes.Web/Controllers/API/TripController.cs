@@ -20,12 +20,14 @@ namespace Viajes.Web.Controllers.API
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
         private readonly IConverterHelper _converterHelper;
+        private readonly IImageHelper _imageHelper;
 
-        public TripsController(DataContext context, IUserHelper userHelper, IConverterHelper converterHelper)
+        public TripsController(DataContext context, IUserHelper userHelper, IConverterHelper converterHelper, IImageHelper imageHelper)
         {
             _context = context;
             _userHelper = userHelper;
             _converterHelper = converterHelper;
+            _imageHelper = imageHelper;
         }
         [HttpPost]
         [Route("AddCost")]
@@ -125,7 +127,13 @@ namespace Viajes.Web.Controllers.API
                 return BadRequest("User doesn't exists.");
             }
 
-
+             string picturePath = string.Empty;
+            byte[] PictureArray;
+            PictureArray=tripRequest.PicturePath;
+             if (PictureArray != null && PictureArray.Length > 0)
+             {
+                 picturePath = _imageHelper.UploadImage(PictureArray, "Users");
+             }
 
             TripEntity TripEntity = new TripEntity
             {
@@ -138,7 +146,7 @@ namespace Viajes.Web.Controllers.API
                     {
                         Origin =tripRequest.Origin,
                         Description=tripRequest.Description,
-                        PicturePath=tripRequest.PicturePath,
+                        PicturePath=picturePath,
                         Costs=new List<CostEntity>
                         {
                             new CostEntity

@@ -18,8 +18,14 @@
                      Padding="5">
             <ScrollView>
                 <StackLayout>
+                    <Label Text="Add Photo of your Invoice"
+          
+           HorizontalOptions="Center"
+               TextColor="Black"
+               FontSize="Title"
+               VerticalOptions="Center"/>
                     <ffimageloading:CachedImage Aspect="AspectFit"
-                                                Source="Trips" 
+                                                Source="{Binding Image}"
                                                 CacheDuration= "50"
                                                 HeightRequest="150"
                                                 Margin="5"
@@ -31,7 +37,6 @@
                         <ffimageloading:CachedImage.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
                         </ffimageloading:CachedImage.GestureRecognizers>
-
                     </ffimageloading:CachedImage>
                     <Grid>
                         <Grid.RowDefinitions>
