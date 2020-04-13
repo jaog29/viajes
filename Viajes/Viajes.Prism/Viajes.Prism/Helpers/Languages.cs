@@ -64,7 +64,9 @@ namespace Viajes.Prism.Helpers
         public static string FromGallery => Resource.FromGallery;
 
         public static string Ok => Resource.Ok;
+        public static string MyTrip => Resource.MyTrip;
 
+        public static string MyTrips => Resource.MyTrips;
 
         public static string Phone => Resource.Phone;
 

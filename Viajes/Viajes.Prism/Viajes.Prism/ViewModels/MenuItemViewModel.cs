@@ -25,8 +25,15 @@ namespace Viajes.Prism.ViewModels
                 Settings.User = null;
                 Settings.Token = null;
             }
+            if (IsLoginRequired && !Settings.IsLogin)
+            {
+                await _navigationService.NavigateAsync($"/TripMasterDetailPage/NavigationPage/LoginPage");
+            }
+            else
+            {
 
-            await _navigationService.NavigateAsync($"/TripMasterDetailPage/NavigationPage/{PageName}");
+                await _navigationService.NavigateAsync($"/TripMasterDetailPage/NavigationPage/{PageName}");
+            }
         }
     }
 }

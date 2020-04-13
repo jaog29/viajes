@@ -439,6 +439,24 @@ namespace Viajes.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Trip.
+        /// </summary>
+        internal static string MyTrip {
+            get {
+                return ResourceManager.GetString("MyTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Trips.
+        /// </summary>
+        internal static string MyTrips {
+            get {
+                return ResourceManager.GetString("MyTrips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New password.
         /// </summary>
         internal static string NewPassword {

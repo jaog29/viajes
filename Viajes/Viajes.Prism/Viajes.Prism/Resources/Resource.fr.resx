@@ -342,4 +342,10 @@
   <data name="successful" xml:space="preserve">
     <value>le voyage a été enregistré</value>
   </data>
+  <data name="MyTrip" xml:space="preserve">
+    <value>mi voyage</value>
+  </data>
+  <data name="MyTrips" xml:space="preserve">
+    <value>mes excursions</value>
+  </data>
 </root>

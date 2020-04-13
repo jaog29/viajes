@@ -44,6 +44,8 @@ namespace Viajes.Prism
             containerRegistry.RegisterForNavigation<RememberPasswordPage, RememberPasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<StartTripPage, StartTripPageViewModel>();
+            containerRegistry.RegisterForNavigation<MyTripsPage, MyTripsPageViewModel>();
+            containerRegistry.RegisterForNavigation<MyTripPage, MyTripPageViewModel>();
         }
     }
 }

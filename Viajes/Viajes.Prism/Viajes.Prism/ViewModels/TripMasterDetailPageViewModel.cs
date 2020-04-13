@@ -88,8 +88,17 @@ private void LoadUser()
                 {
                     Icon = "ic_history",
                     PageName = "TripHistoryPage",
-                    Title = "See trip history"
+                    Title = "See my travel history"
                 },
+                new Menu
+                {
+                      IsLoginRequired = true,
+                    Icon = "ic_history",
+                    PageName = "MyTripsPage",
+                    Title = Languages.MyTrips
+                  
+                },
+
                 new Menu
                 {
                     Icon = "ic_register",
