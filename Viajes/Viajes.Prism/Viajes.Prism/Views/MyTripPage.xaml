@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com"    
+             xmlns:i18n="clr-namespace:Viajes.Prism.Helpers"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"           
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Viajes.Prism.Views.MyTripPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
@@ -9,33 +12,82 @@
 
 
    
-        <StackLayout Margin="15">
+        <StackLayout Margin="10">
+       
+                    <ffimageloading:CachedImage Aspect="AspectFit"
+                                                Source="{Binding Image}"
+                                                CacheDuration= "50"
+                                                HeightRequest="150"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600">
+           <ffimageloading:CachedImage.Transformations>
+            <fftransformations:CircleTransformation />
+            </ffimageloading:CachedImage.Transformations>
+            <ffimageloading:CachedImage.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ChangeImage2Command}"/>
+            </ffimageloading:CachedImage.GestureRecognizers>
+        </ffimageloading:CachedImage>
+              
 
-            <Label Text="Details of the Trip"   FontAttributes="Bold" TextColor="White" FontSize="Medium" ></Label>
+        <Label VerticalOptions="Center" Text="Details of the Trip"   FontAttributes="Bold" TextColor="LightSteelBlue" FontSize="Medium" ></Label>
 
-        <Label Text="Destiny" FontAttributes="Bold" TextColor="White" />
-        <Label Text="{Binding Trip.DestinyCity}"/>
+        <Label  Text="Destiny" FontAttributes="Bold" TextColor="White" />
+        <Label TextColor="Black" Text="{Binding Trip.DestinyCity}"/>
 
         <Label Text="Start Date"  FontAttributes="Bold" TextColor="White"/>
-        <Label Text="{Binding Trip.StartDate}"/>
+        <Label TextColor="Black" Text="{Binding Trip.StartDate}"/>
 
         <Label Text="End Date"  FontAttributes="Bold" TextColor="White"/>
-        <Label Text="{Binding Trip.EndDate}"/>
+        <Label TextColor="Black" Text="{Binding Trip.EndDate}"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Label Text="Origin" FontAttributes="Bold" TextColor="White"/>
-        <Label Text="{Binding Trip.Origin}"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
 
-        <Label Text="Description"  FontAttributes="Bold" TextColor="White"/>
-        <Label Text="{Binding Trip.Description}"/>
+            <Label Grid.Column="0"
+                       FontAttributes="Bold"
+                    TextColor="White"
+                       Text="Origin"/>
 
-        <Label Text="Total Costs" FontAttributes="Bold" TextColor="White"/>
-        <Label Text="{Binding TripDetails.TotalCost, StringFormat='${0}'}"/>
+            <Label Grid.Column="1"
+                       FontAttributes="Bold"
+                    TextColor="White"
+                       Text="Description"/>
 
-        <Label Text="amount of expenses"  FontAttributes="Bold" TextColor="White"/>
-        <Label Text="{Binding TripDetails.CostsCount, StringFormat='{0} gastos'}"/>
+        </Grid>
 
-        <Label></Label>
-        <Label Text="Related Costs" FontSize="Medium"  FontAttributes="Bold" TextColor="White"></Label>
+        <CollectionView ItemsSource="{Binding Trip.TripDetails}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                                    TextColor="Black"
+                                  Text="{Binding Origin}"/>
+
+                        <Label Grid.Column="1"
+                                    TextColor="Black"
+                                  Text="{Binding Description}"/>
+                    
+
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
 
         <Grid>
             <Grid.RowDefinitions>
@@ -44,55 +96,52 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
+           
             <Label Grid.Column="0"
                        FontAttributes="Bold"
-                    TextColor="White"
-                       Text="Category"/>
+                   TextColor="White"
+                       Text="Total Costs"/>
 
             <Label Grid.Column="1"
                        FontAttributes="Bold"
-                    TextColor="White"
-                       Text="Value"/>
-
-            <Label Grid.Column="2"
-                       FontAttributes="Bold"
                    TextColor="White"
-                       Text="Date"/>
-
+                       Text="Amount of Expenses"/>
         </Grid>
 
-        <CollectionView ItemsSource="{Binding TripDetails.Costs}">
+        <CollectionView ItemsSource="{Binding Trip.TripDetails}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
-
-                        <Label Grid.Column="0"
-                                   Text="{Binding TripDetails.Value, StringFormat='${0}'}"/>
+                       
+                        <Label  
+                            Grid.Column="0"
+                                    TextColor="GreenYellow"
+                                   Text="{Binding TotalCost, StringFormat='$ {0:F0}'}" />
                         <Label Grid.Column="1"
-                                   Text="{Binding TripDetails.Category}"/>
-                  
+                                    TextColor="Black"
+                                   Text="{Binding CostsCount, StringFormat='{0} - Costs Associated'}"/>
 
                     </Grid>
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-     
+
+
+       
         <StackLayout>
             <Button Command="{Binding NewCostCommand}" 
-                        Text="Add Details to Trip}"/>
+                        Text="Add Details to Trip"/>
         </StackLayout>
 
     </StackLayout>

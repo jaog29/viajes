@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,11 @@ using Viajes.Common.Helpers;
 using Viajes.Common.Models;
 using Viajes.Common.Services;
 using Viajes.Prism.Helpers;
+using Xamarin.Forms;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
+using Viajes.Prism.Views;
 
 namespace Viajes.Prism.ViewModels
 {
@@ -16,10 +22,11 @@ namespace Viajes.Prism.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
+      
         private bool _isRunning;
         private List<TripItemViewModel> _trips;
         private DelegateCommand _refreshCommand;
-
+      
         public MyTripsPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
@@ -29,14 +36,15 @@ namespace Viajes.Prism.ViewModels
             StartDate = DateTime.Today.AddYears(-2);
             EndDate = DateTime.Today;
             LoadTripsAsync();
+           
         }
-
+     
         public DelegateCommand RefreshCommand => _refreshCommand ?? (_refreshCommand = new DelegateCommand(LoadTripsAsync));
 
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
-
+       
         public bool IsRunning
         {
             get => _isRunning;
@@ -48,6 +56,7 @@ namespace Viajes.Prism.ViewModels
             get => _trips;
             set => SetProperty(ref _trips, value);
         }
+        
 
         private async void LoadTripsAsync()
         {
@@ -69,6 +78,7 @@ namespace Viajes.Prism.ViewModels
                 EndDate = EndDate.AddDays(1).ToUniversalTime(),
                 StartDate = StartDate.ToUniversalTime(),
                 UserId = user.Id
+
             };
 
             Response response = await _apiService.GetMyTrips(url, "api", "/Trips/GetMyTrips", "bearer", token.Token, request);
@@ -80,22 +90,16 @@ namespace Viajes.Prism.ViewModels
                 await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
-           // List<TripDetailResponse> Tripd = (List<TripDetailResponse>)response.Result;
+
             List<TripResponse> Trip = (List<TripResponse>)response.Result;
             Trips = Trip.Select(t => new TripItemViewModel(_navigationService)
-            {
+            { 
                 DestinyCity = t.DestinyCity,
                 EndDate = t.EndDate,
                 Id = t.Id,
                 StartDate = t.StartDate,
                 User = t.User,
-                TripDetails =t.TripDetails /* Tripd.Select(td => new TripDetailResponse
-                {
-                    Origin = td.Origin,
-                    Description = td.Description
-
-
-                }).ToList()*/
+                TripDetails = t.TripDetails
 
 
             }).ToList();

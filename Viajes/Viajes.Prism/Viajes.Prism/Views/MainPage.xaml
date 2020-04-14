@@ -22,7 +22,7 @@
                                                Aspect="AspectFill"
                                                 Source="Trips" 
                                                 CacheDuration= "50"
-                                               HorizontalOptions="CenterAndExpand"
+                                               VerticalOptions="StartAndExpand"
                                                 Margin="0,20,0,0">
             <ffimageloading:CachedImage.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding StartTripCommand}"/>
