@@ -37,7 +37,6 @@ namespace Viajes.Prism
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<TripMasterDetailPage, TripMasterDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<NewTripDetailPage, NewTripDetailPageViewModel>();
-            containerRegistry.RegisterForNavigation<TripHistoryPage, TripHistoryPageViewModel>();
             containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
             containerRegistry.RegisterForNavigation<ModifyUserPage, ModifyUserPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();

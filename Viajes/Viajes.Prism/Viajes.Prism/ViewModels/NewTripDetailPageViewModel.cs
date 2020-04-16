@@ -7,7 +7,7 @@ namespace Viajes.Prism.ViewModels
         public NewTripDetailPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Title = "Add New Trip";
+            Title = "Add New Costs to Trip";
         }
     }
 }

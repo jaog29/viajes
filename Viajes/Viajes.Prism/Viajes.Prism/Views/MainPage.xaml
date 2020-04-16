@@ -12,25 +12,41 @@
 
 
     <StackLayout>
-        <Label Text="¡¡Welcome!!"
-          
-           HorizontalOptions="Center"
+        <Label 
+             HorizontalOptions="Center"
+            VerticalOptions="Center"
+             FontAttributes="Bold"
+            Text="¡¡Welcome!!"
+               TextColor="White"
+               FontSize="Large"/>
+        <Label 
+             HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Text="user this app has been created in order to have a more detailed control of expenses and trips made by employees."
                TextColor="Black"
-               FontSize="Title"
-               VerticalOptions="Center"/>
+            Margin="10,0"
+               FontSize="Body"/>
         <ffimageloading:CachedImage x:Name="Picture" 
-                                               Aspect="AspectFill"
+                                               Aspect="AspectFit"
                                                 Source="Trips" 
                                                 CacheDuration= "50"
-                                               VerticalOptions="StartAndExpand"
-                                                Margin="0,20,0,0">
+                                              HorizontalOptions="Center"
+                                    VerticalOptions="CenterAndExpand"
+                                               >
             <ffimageloading:CachedImage.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding StartTripCommand}"/>
             </ffimageloading:CachedImage.GestureRecognizers>
             <ffimageloading:CachedImage.Transformations>
-
             </ffimageloading:CachedImage.Transformations>
         </ffimageloading:CachedImage>
+        <Label 
+             HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Text="Designed and created by Julian Andres Orozco Garcia"
+             FontAttributes="Bold"
+               TextColor="Black"
+            Margin="10,0"
+               FontSize="Body"/>
         <StackLayout Padding="10">
             <Button Command="{Binding StartTripCommand}" 
                     Margin="10,0"

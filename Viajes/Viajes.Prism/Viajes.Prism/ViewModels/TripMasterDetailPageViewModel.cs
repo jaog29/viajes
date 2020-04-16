@@ -84,12 +84,7 @@ private void LoadUser()
                     PageName = "NewTripDetailPage",
                     Title = "Add Details to Trip"
                 },
-                new Menu
-                {
-                    Icon = "ic_history",
-                    PageName = "TripHistoryPage",
-                    Title = "See my travel history"
-                },
+                
                 new Menu
                 {
                       IsLoginRequired = true,

@@ -29,17 +29,22 @@ namespace Viajes.Prism.ViewModels
         private TripResponse _trip;
         private DelegateCommand _newCostCommand;
         private DelegateCommand _changeImage2Command;
+        private List<CostResponse> _costs;
         public MyTripPageViewModel(INavigationService navigationService, IFilesHelper filesHelper)
             : base(navigationService)
         {
             _filesHelper = filesHelper;
             _navigationService = navigationService;
-            Image = App.Current.Resources["UrlNoImage"].ToString();
+           Image = App.Current.Resources["UrlNoImage"].ToString();
             Title = "Details of the Trip";
         }
         public DelegateCommand NewCostCommand => _newCostCommand ?? (_newCostCommand = new DelegateCommand(GoToNewTripDetailPage));
         public DelegateCommand ChangeImage2Command => _changeImage2Command ?? (_changeImage2Command = new DelegateCommand(ChangeImageAsync));
-
+        public List<CostResponse> Costs
+        {
+            get => _costs;
+            set => SetProperty(ref _costs, value);
+        }
         public TripResponse Trip
         {
             get => _trip;
@@ -54,11 +59,19 @@ namespace Viajes.Prism.ViewModels
         {
             base.OnNavigatedTo(parameters);
             Trip = parameters.GetValue<TripResponse>("trip");
+          
+            Costs = Trip.TripDetails[0].Costs;
         }
 
         public async void GoToNewTripDetailPage()
         {
-            await _navigationService.NavigateAsync(nameof(NewTripDetailPage));
+            NavigationParameters parameters = new NavigationParameters
+            {
+                { "trip", Trip }
+            };
+
+            await _navigationService.NavigateAsync(nameof(NewTripDetailPage), parameters);
+        
         }
         private async void ChangeImageAsync()
         {
