@@ -2,69 +2,80 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+               xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Viajes.Prism.Views.NewTripDetailPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
-    
-    <StackLayout Margin="10">
-       
-        
-        <Label Text="Related Costs" FontSize="Medium"  FontAttributes="Bold" TextColor="White"></Label>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Margin="15">
+            <ScrollView>
+                <StackLayout>
+                    <Label></Label>
+                    <Label Text="Costs of the Trip" FontSize="Title" TextColor="Black" FontAttributes="Bold"></Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
-        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
-                       FontAttributes="Bold"
-                    TextColor="White"
-                       Text="Category"/>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Value"
+                               TextColor="White"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="0"
+                               Grid.Column="1"
+                                Placeholder="Enter the Value"
+                               Keyboard="Numeric"                             
+                               Text="{Binding Value}"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Text="Category"
+                               TextColor="White"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                               Keyboard="Text"
+                               Placeholder="Enter Category."
+                               Text="{Binding Category}"/>
+                        
 
-        <Label Grid.Column="1"
-                       FontAttributes="Bold"
-                    TextColor="White"
-                       Text="Value"/>
+                    </Grid>
 
-        <Label Grid.Column="2"
-                       FontAttributes="Bold"
-                   TextColor="White"
-                       Text="Date"/>
-
-    </Grid>
-
-
-    <CollectionView ItemsSource="{Binding TripDetails.Costs}">
-        <CollectionView.ItemsLayout>
-            <GridItemsLayout Orientation="Vertical"/>
-        </CollectionView.ItemsLayout>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Label Grid.Column="0"
-                                   Text="{Binding Value, StringFormat='$ {0:F0}'}" />
-                    <Label Grid.Column="1"
-                                   Text="{Binding Category}"/>
-                    <Label Grid.Column="2"
-                                   Text="{Binding CreatedDate}"/>
+                </StackLayout>
+            </ScrollView>
 
 
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
-    </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="EndAndExpand">
+                <Button Command="{Binding SaveCost}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="Save Cost"/>
+            </StackLayout>
+
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="MovieTimer" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                                       AbsoluteLayout.LayoutFlags="All"
+                                       BackgroundColor="{StaticResource ColorAccent}"
+                                       HorizontalOptions="Center"
+                                       TextColor="{StaticResource ColorFontInverse}"
+                                       IsVisible="{Binding IsRunning}"
+                                       Title="Cargando..."
+                                       VerticalOptions="Center"
+                                       ViewBoxWidth="80"
+                                       ViewBoxHeight="80" />
+    </AbsoluteLayout>
+
 </ContentPage>

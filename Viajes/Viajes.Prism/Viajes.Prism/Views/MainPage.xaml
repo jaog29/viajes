@@ -22,12 +22,14 @@
         <Label 
              HorizontalOptions="Center"
             VerticalOptions="Center"
-            Text="user this app has been created in order to have a more detailed control of expenses and trips made by employees."
+            Text="user this app has been created in order to have a more detailed control of expenses and trips made by employees, 
+I invite you to dive into the app and make use of all its features, enjoy it."
                TextColor="Black"
             Margin="10,0"
-               FontSize="Body"/>
+               FontSize="Medium"/>
         <ffimageloading:CachedImage x:Name="Picture" 
-                                               Aspect="AspectFit"
+                                               Aspect="AspectFill"
+                                    
                                                 Source="Trips" 
                                                 CacheDuration= "50"
                                               HorizontalOptions="Center"

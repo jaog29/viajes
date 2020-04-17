@@ -70,50 +70,58 @@ private void LoadUser()
 
         private void LoadMenus()
         {
-            List<Menu> menus = new List<Menu>
+            List<Menu> menus = new List<Menu>();
+            menus.Add(new Menu
             {
-                new Menu
-                {
-                    Icon = "ic_trip",
-                    PageName = "MainPage",
-                    Title = "New trip"
-                },
-                new Menu
-                {
-                    Icon = "ic_details",
-                    PageName = "NewTripDetailPage",
-                    Title = "Add Details to Trip"
-                },
-                
-                new Menu
-                {
-                      IsLoginRequired = true,
-                    Icon = "ic_history",
-                    PageName = "MyTripsPage",
-                    Title = Languages.MyTrips
-                  
-                },
+                Icon = "ic_trip",
+                PageName = "MainPage",
+                Title = "New trip"
+            });
+            menus.Add(new Menu
+            {
+                Icon = "ic_login",
+                PageName = "LoginPage",
+                Title = Settings.IsLogin ? Languages.Logout : Languages.Login
+            });
 
-                new Menu
-                {
-                    Icon = "ic_register",
-                    PageName = "RegisterPage",
-                    Title = "Register new user"
-                },
-                new Menu
+
+            if (Settings.IsLogin)
+            {
+
+                menus.Add(new Menu
                 {
                     Icon = "ic_modify",
                     PageName = "ModifyUserPage",
                     Title = "Modify User"
-                },
-                new Menu
-                {
-                    Icon = "ic_login",
-                    PageName = "LoginPage",
-                        Title = Settings.IsLogin ? Languages.Logout : Languages.Login
+                });
 
-                }
-            };
+                menus.Add(new Menu
+                {
+                    IsLoginRequired = true,
+                    Icon = "ic_history",
+                    PageName = "MyTripsPage",
+                    Title = Languages.MyTrips
+                });
+
+                menus.Add(new Menu
+                {
+                    Icon = "ic_details",
+                    PageName = "NewTripDetailPage",
+                    Title = "Add Details to Trip"
+                });
+
+            }
+            else
+            {
+                menus.Add(new Menu
+                {
+                    Icon = "ic_register",
+                    PageName = "RegisterPage",
+                    Title = "Register new user"
+                });
+
+            }
+
 
             Menus = new ObservableCollection<MenuItemViewModel>(
                 menus.Select(m => new MenuItemViewModel(_navigationService)
@@ -122,6 +130,7 @@ private void LoadUser()
                     PageName = m.PageName,
                     Title = m.Title
                 }).ToList());
+      
         }
     }
 }
