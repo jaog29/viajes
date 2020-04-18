@@ -31,20 +31,15 @@ namespace Viajes.Web.Controllers.API
         }
         [HttpPost]
         [Route("AddCost")]
-        public async Task<IActionResult>AddCost([FromBody] CostsTripRequest costsTripRequest)
+        public async Task<IActionResult>AddCost([FromBody] CostTripRequest costTripRequest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (costsTripRequest.Costs == null || costsTripRequest.Costs.Count == 0)
-            {
-                return NoContent();
-            }
+            }          
               TripDetailEntity tripDetail = await _context.TripDetails
                 .Include(t => t.Costs)
-                .FirstOrDefaultAsync(t => t.Id == costsTripRequest.Costs.FirstOrDefault().Id);
+                .FirstOrDefaultAsync(t => t.Id == costTripRequest.TripId);
             if (tripDetail == null)
             {
                 return BadRequest("Trip not found.");
@@ -55,15 +50,14 @@ namespace Viajes.Web.Controllers.API
                 tripDetail.Costs = new List<CostEntity>();
             }
 
-            foreach (CostTripRequest costTripRequest in costsTripRequest.Costs )
+           
+            tripDetail.Costs.Add(new CostEntity
             {
-                tripDetail.Costs.Add(new CostEntity
-                {
-                  Value=costTripRequest.Value,
-                  Category=costTripRequest.Category,
-                    CreatedDate = DateTime.UtcNow
-                });
-            }
+                Value=costTripRequest.Value,
+                Category=costTripRequest.Category,
+                CreatedDate = DateTime.UtcNow
+            });
+            
 
             _context.TripDetails.Update(tripDetail);
             await _context.SaveChangesAsync();

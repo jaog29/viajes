@@ -14,14 +14,10 @@ namespace Viajes.Prism.ViewModels
     public class ModifyUserPageViewModel : ViewModelBase
     {
         private DelegateCommand _changePasswordCommand;
-        //private readonly IFilesHelper _filesHelper;
         private readonly IApiService _apiService;
         private bool _isRunning;
         private bool _isEnabled;
-        //private ImageSource _image;
         private UserResponse _user;
-        //private MediaFile _file;
-       // private DelegateCommand _changeImageCommand;
         private DelegateCommand _saveCommand;
         private readonly INavigationService _navigationService;
         public ModifyUserPageViewModel(INavigationService navigationService,IApiService apiService)
@@ -30,23 +26,12 @@ namespace Viajes.Prism.ViewModels
             Title = Languages.ModifyUser;
             IsEnabled = true;
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
-            //_filesHelper = filesHelper;
             _navigationService = navigationService;
             _apiService = apiService;
-            //Image = User.PictureFullPath;
+    
         }
         public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePasswordAsync));
-
-
-        //public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
-
         public DelegateCommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(SaveAsync));
-
-       /* public ImageSource Image
-        {
-            get => _image;
-            set => SetProperty(ref _image, value);
-        }*/
 
         public UserResponse User
         {
@@ -80,12 +65,6 @@ namespace Viajes.Prism.ViewModels
             }
             IsRunning = true;
             IsEnabled = false;
-            /*byte[] imageArray = null;
-            if (_file != null)
-            {
-                imageArray = _filesHelper.ReadFully(_file.GetStream());
-            }*/
-
             var userRequest = new UserRequest
             {
                 
@@ -95,7 +74,6 @@ namespace Viajes.Prism.ViewModels
                 LastName = User.LastName,
                 Password = "123456", // It doesn't matter what is sent here. It is only for the model to be valid
                 Phone = User.PhoneNumber,
-                //PictureArray = imageArray,
                 UserTypeId = User.UserType == UserType.User ? 1 : 2,
                 CultureInfo = Languages.Culture
             };
@@ -155,47 +133,5 @@ namespace Viajes.Prism.ViewModels
             return true;
         }
 
-       /* private async void ChangeImageAsync()
-        {
-            await CrossMedia.Current.Initialize();
-
-            string source = await Application.Current.MainPage.DisplayActionSheet(
-                Languages.PictureSource,
-                Languages.Cancel,
-                null,
-                Languages.FromGallery,
-                Languages.FromCamera);
-
-            if (source == Languages.Cancel)
-            {
-                _file = null;
-                return;
-            }
-
-            if (source == Languages.FromCamera)
-            {
-                _file = await CrossMedia.Current.TakePhotoAsync(
-                    new StoreCameraMediaOptions
-                    {
-                        Directory = "Sample",
-                        Name = "test.jpg",
-                        PhotoSize = PhotoSize.Small,
-                    }
-                );
-            }
-            else
-            {
-                _file = await CrossMedia.Current.PickPhotoAsync();
-            }
-
-            if (_file != null)
-            {
-                Image = ImageSource.FromStream(() =>
-                {
-                    System.IO.Stream stream = _file.GetStream();
-                    return stream;
-                });
-            }
-        }*/
     }
 }

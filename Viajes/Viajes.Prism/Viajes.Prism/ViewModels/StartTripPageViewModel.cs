@@ -4,7 +4,6 @@ using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Viajes.Common.Helpers;
@@ -26,15 +25,13 @@ namespace Viajes.Prism.ViewModels
         private readonly IFilesHelper _filesHelper;
         private MediaFile _file;
         private ImageSource _image;
-        private readonly UserResponse _user;
-        private readonly TokenResponse _token;
         private DelegateCommand _changeImageCommand;
         private DelegateCommand _saveCommand;
         private DelegateCommand _cancelTripCommand;
         private bool _isSecondButtonVisible;
         private bool _isRunning;
         private bool _isEnabled;
-        private TripRequest _trip;
+        
 
         public StartTripPageViewModel(INavigationService navigationService, IRegexHelper regexHelper,
                                        IApiService apiService,
@@ -46,11 +43,9 @@ namespace Viajes.Prism.ViewModels
             _apiService = apiService;
             _filesHelper = filesHelper;
             Title = Languages.StartTrip;
-            //ButtonLabel = Languages.StartTrip;
-            //LoadSourceAsync();
             Image = App.Current.Resources["UrlNoImage"].ToString();
             IsEnabled = true;
-            //Trip = new TripRequest();
+
         }
         public DelegateCommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(SaveAsync));
         public DelegateCommand CancelTripCommand => _cancelTripCommand ?? (_cancelTripCommand = new DelegateCommand(CancelAsync));
@@ -79,22 +74,13 @@ namespace Viajes.Prism.ViewModels
             get => _image;
             set => SetProperty(ref _image, value);
         }
-        /*public TripRequest Trip { 
-            get => _trip;
-            set => SetProperty(ref _trip, value);
-        }*/
+  
         public string Category { get; set; }
         public bool IsSecondButtonVisible
         {
             get => _isSecondButtonVisible;
             set => SetProperty(ref _isSecondButtonVisible, value);
         }
-
-        /* public string ButtonLabel
-         {
-             get => _source;
-             set => SetProperty(ref _source, value);
-         }*/
 
         public bool IsRunning
         {

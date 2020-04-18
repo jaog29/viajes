@@ -8,7 +8,7 @@ namespace Viajes.Common.Models
     public class CostTripRequest
     {
         [Required]  
-        public int Id { get; set; }
+        public int  TripId { get; set; }
         [Required]
         public float Value { get; set; }
         [Required]

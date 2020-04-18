@@ -103,13 +103,6 @@ private void LoadUser()
                     Title = Languages.MyTrips
                 });
 
-                menus.Add(new Menu
-                {
-                    Icon = "ic_details",
-                    PageName = "NewTripDetailPage",
-                    Title = "Add Details to Trip"
-                });
-
             }
             else
             {

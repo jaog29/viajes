@@ -82,25 +82,17 @@ namespace Viajes.Prism.ViewModels
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }
-
-            UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
-
-
-
-            var TripRequest = new TripRequest
+            CostTripRequest CostTripRequest = new CostTripRequest
             {
               
-            DestinyCity=Trip.DestinyCity,
-           
+                TripId=Trip.TripDetails[0].Id,
                 Value = Value,
                 Category = Category,
                 CreatedDate = DateTime.Now
-                          };
+            };
 
-            Response response = await _apiService.NewTripAsync(url, "/api", "/trips/AddCost", TripRequest, "bearer", token.Token);
-
-            //var response = await _apiService.AddNewCost(url, "/api", "/trips/AddCost", "bearer", token.Token, CostTripRequest);
+            var response = await _apiService.AddNewCost(url, "/api", "/trips/AddCost", "bearer", token.Token, CostTripRequest);
             IsRunning = false;
             IsEnabled = true;
 
@@ -111,9 +103,7 @@ namespace Viajes.Prism.ViewModels
             }
 
             await App.Current.MainPage.DisplayAlert(Languages.Ok, "New added Cost", Languages.Accept);
-                 await _navigationService.GoBackAsync();
-          
-
+            await _navigationService.NavigateAsync("/TripMasterDetailPage/NavigationPage/MyTripsPage");
         }
 
         private async Task<bool> ValidateDataAsync()

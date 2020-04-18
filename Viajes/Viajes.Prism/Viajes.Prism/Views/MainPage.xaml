@@ -52,7 +52,7 @@ I invite you to dive into the app and make use of all its features, enjoy it."
         <StackLayout Padding="10">
             <Button Command="{Binding StartTripCommand}" 
                     Margin="10,0"
-                    Text="{i18n:Translate StartTrip}"/>
+                    Text="{i18n:Translate NewTrip}"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

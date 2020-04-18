@@ -191,14 +191,7 @@
                        Text="{Binding Trip.Category}"/>
 
                     </Grid>
-                    <Label FontAttributes="Bold"
-            HorizontalOptions="Center" 
-            Text="{i18n:Translate AddDetailstoTrip}"
-            TextColor="{StaticResource ColorAccent}">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding AddCostCommand}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
+                    
                 </StackLayout>
             </ScrollView>
 
@@ -206,7 +199,7 @@
                 <Button Command="{Binding StartTripCommand}" 
                         IsVisible="False"
                         IsEnabled="{Binding IsEnabled}"
-                        Text="{i18n:Translate StartTrip }"/>
+                        Text="{i18n:Translate NewTrip }"/>
                 <Button Command="{Binding SaveCommand}" 
                         IsVisible="True"
                         IsEnabled="{Binding IsEnabled}"
