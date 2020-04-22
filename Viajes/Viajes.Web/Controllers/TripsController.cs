@@ -31,14 +31,20 @@ namespace Viajes.Web.Controllers
                 return NotFound();
             }
 
-            TripEntity tripEntity = await _context.Trips
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tripEntity == null)
+            /* TripEntity tripEntity = await _context.Trips
+                 .FirstOrDefaultAsync(m => m.Id == id);*/
+            var TripEntity = await _context.Trips
+            .Include(t => t.User)
+            .Include(t => t.TripDetails)
+            .ThenInclude(t => t.Costs)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (TripEntity == null)
             {
                 return NotFound();
             }
 
-            return View(tripEntity);
+            return View(TripEntity);
         }
         [HttpGet]
         public IActionResult Create()

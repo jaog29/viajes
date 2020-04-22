@@ -23,14 +23,84 @@
             @Html.DisplayFor(model => model.EndDateTrip)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DestinyCity)
+            Destiny
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DestinyCity)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Document)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Document)
+        </dd>
+        <dt>
+            User Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+      
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |
     <a asp-action="Index" class="btn btn-success">Back to List</a>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Costs of the Trip</h3>
+            </div>
+            <div class="panel-body">
+
+                @foreach (var item in Model.TripDetails)
+                {
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2">
+
+                                <p><b>Origin</b></p>
+                                <p>@Html.DisplayFor(modelItem => item.Origin)</p>
+
+                                <p><b>Description</b></p>
+                                <p>@Html.DisplayFor(modelItem => item.Description)</p>
+
+                                <p><b>Count Costs</b></p>
+                                <p>@Html.DisplayFor(modelItem => item.Costs.Count)</p>
+
+                                <p><b> Total Value</b></p>
+                                <p>$@Html.DisplayFor(modelItem => item.Costs)</p>
+
+                            </div>
+                            <div class="col-md-10">
+
+                                <p><b>Receipt Photo</b></p>
+                                <br />
+                                <img src="@Url.Content(item.PicturePath)" height="400" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <br />
+                }
+            </div>
+        </div>
+    </div>
 </div>
